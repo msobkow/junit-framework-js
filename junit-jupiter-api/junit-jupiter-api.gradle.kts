@@ -1,32 +1,44 @@
 import junitbuild.generator.GenerateJreRelatedSourceCode
 
 plugins {
-	id("junitbuild.kotlin-library-conventions")
-	id("junitbuild.code-generator")
+	id("server.markhome.mcf.v3_1.junitbuild.kotlin-library-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.code-generator")
+	//id("junitbuild.kotlin-library-conventions")
+	//id("junitbuild.code-generator")
 	`java-test-fixtures`
 }
 
 description = "JUnit Jupiter API"
 
 dependencies {
-	api(platform(projects.junitBom))
-	api(libs.opentest4j)
-	api(projects.junitPlatformCommons)
+	api(platform(server.markhome.mcf.v3_1.projects.junitBom))
+	api(server.markhome.mcf.v3_1.libs.opentest4j)
+	api(server.markhome.mcf.v3_1.projects.junitPlatformCommons)
+	//api(platform(projects.junitBom))
+	//api(libs.opentest4j)
+	//api(projects.junitPlatformCommons)
 
-	compileOnlyApi(libs.apiguardian)
-	compileOnlyApi(libs.jspecify)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.apiguardian)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.jspecify)
+	//compileOnlyApi(libs.apiguardian)
+	//compileOnlyApi(libs.jspecify)
 
 	compileOnly(kotlin("stdlib"))
 
-	testFixturesImplementation(libs.assertj)
-	testFixturesImplementation(testFixtures(projects.junitPlatformCommons))
+	testFixturesImplementation(server.markhome.mcf.v3_1.libs.assertj)
+	testFixturesImplementation(testFixtures(server.markhome.mcf.v3_1.projects.junitPlatformCommons))
+	//testFixturesImplementation(libs.assertj)
+	//testFixturesImplementation(testFixtures(projects.junitPlatformCommons))
 
-	osgiVerification(projects.junitJupiterEngine)
-	osgiVerification(projects.junitPlatformLauncher)
+	osgiVerification(server.markhome.mcf.v3_1.projects.junitJupiterEngine)
+	osgiVerification(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+	//osgiVerification(projects.junitJupiterEngine)
+	//osgiVerification(projects.junitPlatformLauncher)
 }
 
 javadocConventions {
-	addExtraModuleReferences(projects.junitPlatformEngine, projects.junitPlatformLauncher, projects.junitJupiterParams)
+	addExtraModuleReferences(server.markhome.mcf.v3_1.projects.junitPlatformEngine, server.markhome.mcf.v3_1.projects.junitPlatformLauncher, server.markhome.mcf.v3_1.projects.junitJupiterParams)
+	//addExtraModuleReferences(projects.junitPlatformEngine, projects.junitPlatformLauncher, projects.junitJupiterParams)
 }
 
 eclipseConventions {

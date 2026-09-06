@@ -5,15 +5,23 @@ plugins {
 description = "JUnit Jupiter (Aggregator)"
 
 dependencies {
-	api(platform(projects.junitBom))
-	api(projects.junitJupiterApi)
-	api(projects.junitJupiterParams)
+	api(server.markhome.mcf.v3_1.platform(projects.junitBom))
+	api(server.markhome.mcf.v3_1.projects.junitJupiterApi)
+	api(server.markhome.mcf.v3_1.projects.junitJupiterParams)
+	//api(platform(projects.junitBom))
+	//api(projects.junitJupiterApi)
+	//api(projects.junitJupiterParams)
 
-	implementation(projects.junitJupiterEngine)
+	implementation(server.markhome.mcf.v3_1.projects.junitJupiterEngine)
+	//implementation(projects.junitJupiterEngine)
 
-	compileOnly(libs.apiguardian)
-	compileOnly(libs.jspecify)
+	compileOnly(server.markhome.mcf.v3_1.libs.apiguardian)
+	compileOnly(server.markhome.mcf.v3_1.libs.jspecify)
+	//compileOnly(libs.apiguardian)
+	//compileOnly(libs.jspecify)
 
-	osgiVerification(projects.junitJupiterEngine)
-	osgiVerification(projects.junitPlatformLauncher)
+	osgiVerification(server.markhome.mcf.v3_1.projects.junitJupiterEngine)
+	osgiVerification(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+	//osgiVerification(projects.junitJupiterEngine)
+	//osgiVerification(projects.junitPlatformLauncher)
 }

@@ -1,29 +1,41 @@
 import junitbuild.extensions.javaModuleName
 
 plugins {
-	id("junitbuild.java-library-conventions")
-	id("junitbuild.shadow-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.java-library-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.shadow-conventions")
+	//id("junitbuild.java-library-conventions")
+	//id("junitbuild.shadow-conventions")
 	`java-test-fixtures`
 }
 
 description = "JUnit Platform Reporting"
 
 dependencies {
-	api(platform(projects.junitBom))
-	api(projects.junitPlatformLauncher)
+	api(platform(server.markhome.mcf.v3_1.projects.junitBom))
+	api(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+	//api(platform(projects.junitBom))
+	//api(projects.junitPlatformLauncher)
 
-	implementation(libs.openTestReporting.tooling.spi)
+	implementation(server.markhome.mcf.v3_1.libs.openTestReporting.tooling.spi)
+	//implementation(libs.openTestReporting.tooling.spi)
 
-	compileOnlyApi(libs.apiguardian)
-	compileOnlyApi(libs.jspecify)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.apiguardian)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.jspecify)
+	//compileOnlyApi(libs.apiguardian)
+	//compileOnlyApi(libs.jspecify)
 
-	shadowed(libs.openTestReporting.events)
+	shadowed(server.markhome.mcf.v3_1.libs.openTestReporting.events)
+	//shadowed(libs.openTestReporting.events)
 
-	osgiVerification(projects.junitJupiterEngine)
-	osgiVerification(projects.junitPlatformLauncher)
-	osgiVerification(libs.openTestReporting.tooling.spi)
+	osgiVerification(server.markhome.mcf.v3_1.projects.junitJupiterEngine)
+	osgiVerification(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+	osgiVerification(server.markhome.mcf.v3_1.libs.openTestReporting.tooling.spi)
+	//osgiVerification(projects.junitJupiterEngine)
+	//osgiVerification(projects.junitPlatformLauncher)
+	//osgiVerification(libs.openTestReporting.tooling.spi)
 
-	testFixturesApi(projects.junitJupiterApi)
+	testFixturesApi(server.markhome.mcf.v3_1.projects.junitJupiterApi)
+	//testFixturesApi(projects.junitJupiterApi)
 }
 
 tasks {

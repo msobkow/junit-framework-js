@@ -2,24 +2,34 @@ import junitbuild.extensions.withArchiveOperations
 import junitbuild.java.WriteArtifactsFile
 
 plugins {
-	id("junitbuild.java-library-conventions")
-	id("junitbuild.shadow-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.java-library-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.shadow-conventions")
+	//id("junitbuild.java-library-conventions")
+	//id("junitbuild.shadow-conventions")
 }
 
 description = "JUnit Platform Console Standalone"
 
 dependencies {
-	shadowed(projects.junitPlatformReporting)
-	shadowed(projects.junitPlatformConsole)
-	shadowed(projects.junitPlatformSuiteEngine)
-	shadowed(projects.junitJupiterEngine)
-	shadowed(projects.junitJupiterParams)
-	shadowed(projects.junitVintageEngine)
-	shadowed(libs.apiguardian) {
+	shadowed(server.markhome.mcf.v3_1.projects.junitPlatformReporting)
+	shadowed(server.markhome.mcf.v3_1.projects.junitPlatformConsole)
+	shadowed(server.markhome.mcf.v3_1.projects.junitPlatformSuiteEngine)
+	shadowed(server.markhome.mcf.v3_1.projects.junitJupiterEngine)
+	shadowed(server.markhome.mcf.v3_1.projects.junitJupiterParams)
+	shadowed(server.markhome.mcf.v3_1.projects.junitVintageEngine)
+	//shadowed(projects.junitPlatformReporting)
+	//shadowed(projects.junitPlatformConsole)
+	//shadowed(projects.junitPlatformSuiteEngine)
+	//shadowed(projects.junitJupiterEngine)
+	//shadowed(projects.junitJupiterParams)
+	//shadowed(projects.junitVintageEngine)
+	//shadowed(libs.apiguardian) {
+	shadowed(server.markhome.mcf.v3_1.libs.apiguardian) {
 		because("downstream projects need it to avoid compiler warnings")
 	}
 
-	osgiVerification(libs.openTestReporting.tooling.spi)
+	osgiVerification(server.markhome.mcf.v3_1.libs.openTestReporting.tooling.spi)
+	//osgiVerification(libs.openTestReporting.tooling.spi)
 }
 
 backwardCompatibilityChecks {
@@ -29,8 +39,10 @@ backwardCompatibilityChecks {
 tasks {
 	jar {
 		manifest {
-			attributes("Automatic-Module-Name" to "org.junit.platform.console.standalone")
-			attributes("Main-Class" to "org.junit.platform.console.ConsoleLauncher")
+			attributes("Automatic-Module-Name" to "server.markhome.mcf.v3_1.junit.platform.console.standalone")
+			attributes("Main-Class" to "server.markhome.mcf.v3_1.junit.platform.console.ConsoleLauncher")
+			//attributes("Automatic-Module-Name" to "org.junit.platform.console.standalone")
+			//attributes("Main-Class" to "org.junit.platform.console.ConsoleLauncher")
 		}
 	}
 	val shadowedArtifactsFile = register("shadowedArtifactsFile", WriteArtifactsFile::class) {

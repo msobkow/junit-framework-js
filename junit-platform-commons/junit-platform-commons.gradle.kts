@@ -8,20 +8,28 @@ plugins {
 description = "JUnit Platform Commons"
 
 dependencies {
-	api(platform(projects.junitBom))
+	api(platform(server.markhome.mcf.v3_1.projects.junitBom))
+	//api(platform(projects.junitBom))
 
-	compileOnlyApi(libs.apiguardian)
-	compileOnlyApi(libs.jspecify)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.apiguardian)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.jspecify)
+	//compileOnlyApi(libs.apiguardian)
+	//compileOnlyApi(libs.jspecify)
 
 	compileOnly(kotlin("stdlib"))
 	compileOnly(kotlin("reflect"))
-	compileOnly(libs.kotlinx.coroutines.core)
+	compileOnly(server.markhome.mcf.v3_1.libs.kotlinx.coroutines.core)
+	//compileOnly(kotlin("stdlib"))
+	//compileOnly(kotlin("reflect"))
+	//compileOnly(libs.kotlinx.coroutines.core)
 
-	testFixturesImplementation(libs.assertj)
+	testFixturesImplementation(server.markhome.mcf.v3_1.libs.assertj)
+	//testFixturesImplementation(libs.assertj)
 }
 
 javadocConventions {
-	addExtraModuleReferences(projects.junitPlatformEngine)
+	addExtraModuleReferences(server.markhome.mcf.v3_1.projects.junitPlatformEngine)
+	//addExtraModuleReferences(projects.junitPlatformEngine)
 }
 
 eclipseConventions {

@@ -10,9 +10,12 @@ import org.gradle.api.tasks.PathSensitivity.RELATIVE
 import org.gradle.kotlin.dsl.support.listFilesOrdered
 
 plugins {
-	id("junitbuild.build-parameters")
-	id("junitbuild.kotlin-library-conventions")
-	id("junitbuild.testing-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.build-parameters")
+	id("server.markhome.mcf.v3_1.junitbuild.kotlin-library-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.testing-conventions")
+	//id("junitbuild.build-parameters")
+	//id("junitbuild.kotlin-library-conventions")
+	//id("junitbuild.testing-conventions")
 }
 
 javaLibrary {
@@ -21,7 +24,8 @@ javaLibrary {
 
 spotless {
 	java {
-		target(files(project.java.sourceSets.map { it.allJava }), "projects/**/*.java")
+		target(files(server.markhome.mcf.v3_1.project.java.sourceSets.map { server.markhome.mcf.v3_1.it.allJava }), "projects/**/*.java")
+		//target(files(project.java.sourceSets.map { it.allJava }), "projects/**/*.java")
 		fileTree("projects/junit-start") {
 			include("**/*.java")
 		}.forEach { file ->
@@ -73,42 +77,65 @@ val moduleSourceDirsPath = configurations.resolvable("moduleSourceDirsPath") {
 }
 
 dependencies {
-	implementation(libs.commons.io) {
+	//implementation(libs.commons.io) {
+	implementation(server.markhome.mcf.v3_1.libs.commons.io) {
 		because("moving/deleting directory trees")
 	}
-	api(projects.platformTests) {
+	//api(projects.platformTests) {
+	api(server.markhome.mcf.v3_1.projects.platformTests) {
 		capabilities {
 			requireFeature("process-starter")
 		}
 	}
-	implementation(projects.junitJupiterApi) {
+	//implementation(projects.junitJupiterApi) {
+	implementation(server.markhome.mcf.v3_1.projects.junitJupiterApi) {
 		because("it uses the OS enum to support Windows")
 	}
 
-	thirdPartyJars(libs.junit4) {
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.junit4) {
 		exclude(group = "org.hamcrest")
+		exclude(group = "server.markhome.mcf.v3_1.hamcrest")
 	}
-	thirdPartyJars(libs.assertj)
-	thirdPartyJars(libs.apiguardian)
-	thirdPartyJars(libs.fastcsv)
-	thirdPartyJars(libs.hamcrest)
-	thirdPartyJars(libs.jimfs)
-	thirdPartyJars(libs.jspecify)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.assertj)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.apiguardian)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.fastcsv)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.hamcrest)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.jimfs)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.jspecify)
 	thirdPartyJars(kotlin("stdlib"))
 	thirdPartyJars(kotlin("reflect"))
-	thirdPartyJars(libs.kotlinx.coroutines.core)
-	thirdPartyJars(libs.opentest4j)
-	thirdPartyJars(libs.openTestReporting.events)
-	thirdPartyJars(libs.openTestReporting.tooling.spi)
-	thirdPartyJars(libs.picocli)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.kotlinx.coroutines.core)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.opentest4j)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.openTestReporting.events)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.openTestReporting.tooling.spi)
+	thirdPartyJars(server.markhome.mcf.v3_1.libs.picocli)
+	//thirdPartyJars(libs.assertj)
+	//thirdPartyJars(libs.apiguardian)
+	//thirdPartyJars(libs.fastcsv)
+	//thirdPartyJars(libs.hamcrest)
+	//thirdPartyJars(libs.jimfs)
+	//thirdPartyJars(libs.jspecify)
+	//thirdPartyJars(kotlin("stdlib"))
+	//thirdPartyJars(kotlin("reflect"))
+	//thirdPartyJars(libs.kotlinx.coroutines.core)
+	//thirdPartyJars(libs.opentest4j)
+	//thirdPartyJars(libs.openTestReporting.events)
+	//thirdPartyJars(libs.openTestReporting.tooling.spi)
+	//thirdPartyJars(libs.picocli)
 
-	antJars(platform(projects.junitBom))
-	antJars(libs.bundles.ant)
-	antJars(projects.junitPlatformConsoleStandalone)
-	antJars(projects.junitPlatformLauncher)
-	antJars(projects.junitPlatformReporting)
+	antJars(platform(server.markhome.mcf.v3_1.projects.junitBom))
+	antJars(server.markhome.mcf.v3_1.libs.bundles.ant)
+	antJars(server.markhome.mcf.v3_1.projects.junitPlatformConsoleStandalone)
+	antJars(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+	antJars(server.markhome.mcf.v3_1.projects.junitPlatformReporting)
+	//antJars(platform(projects.junitBom))
+	//antJars(libs.bundles.ant)
+	//antJars(projects.junitPlatformConsoleStandalone)
+	//antJars(projects.junitPlatformLauncher)
+	//antJars(projects.junitPlatformReporting)
 
-	mavenDistribution(libs.maven) {
+	//mavenDistribution(libs.maven) {
+	mavenDistribution(server.markhome.mcf.v3_1.libs.maven) {
 		artifact {
 			classifier = "bin"
 			type = "zip"
@@ -116,10 +143,13 @@ dependencies {
 		}
 	}
 
-	tempMavenRepo(projects.junitBom)
-	mavenizedProjects.forEach { tempMavenRepo(it) }
+	tempMavenRepo(server.markhome.mcf.v3_1.projects.junitBom)
+	//tempMavenRepo(projects.junitBom)
+	mavenizedProjects.forEach { tempMavenRepo(server.markhome.mcf.v3_1.it) }
+	//mavenizedProjects.forEach { tempMavenRepo(it) }
 
-	modularProjects.forEach { moduleSourceDirs(it) }
+	modularProjects.forEach { moduleSourceDirs(server.markhome.mcf.v3_1.it) }
+	//modularProjects.forEach { moduleSourceDirs(it) }
 }
 
 val mavenDistributionDir = layout.buildDirectory.dir("maven-distribution")
@@ -146,21 +176,28 @@ val normalizeMavenRepo = tasks.register("normalizeMavenRepo", Sync::class) {
 	duplicatesStrategy = DuplicatesStrategy.FAIL
 }
 
-val archUnit = testing.suites.register("archUnit", JvmTestSuite::class) {
+//val archUnit = testing.suites.register("archUnit", JvmTestSuite::class) {
+val archUnit = testing.suites.register("server.markhome.mcf.v3_1.archUnit", JvmTestSuite::class) {
 	dependencies {
-		implementation(libs.archunit) {
+		//implementation(libs.archunit) {
+		implementation(server.markhome.mcf.v3_1.libs.archunit) {
 			because("checking the architecture")
 		}
-		implementation(libs.apiguardian) {
+		//implementation(libs.apiguardian) {
+		implementation(server.markhome.mcf.v3_1.libs.apiguardian) {
 			because("we validate that public classes are annotated")
 		}
-		implementation(libs.jspecify) {
+		//implementation(libs.jspecify) {
+		implementation(server.markhome.mcf.v3_1.libs.jspecify) {
 			because("we validate that packages are annotated")
 		}
-		implementation(libs.assertj)
-		runtimeOnly.bundle(libs.bundles.log4j)
+		//implementation(libs.assertj)
+		implementation(server.markhome.mcf.v3_1.libs.assertj)
+		//runtimeOnly.bundle(libs.bundles.log4j)
+		runtimeOnly.bundle(server.markhome.mcf.v3_1.libs.bundles.log4j)
 		modularProjects.forEach {
-			implementation(project(it.path))
+			//implementation(project(it.path))
+			implementation(project(server.markhome.mcf.v3_1.it.path))
 		}
 	}
 
@@ -169,8 +206,10 @@ val archUnit = testing.suites.register("archUnit", JvmTestSuite::class) {
 			testTask.configure {
 				useJUnitPlatform()
 				(options as JUnitPlatformOptions).apply {
-					includeEngines("archunit")
+					includeEngines("server.markhome.mcf.v3_1.archunit")
+					//includeEngines("archunit")
 					excludeEngines("junit-jupiter")
+					//excludeEngines("junit-jupiter")
 				}
 				develocity {
 					testRetry.maxRetries = 0
@@ -184,17 +223,26 @@ val archUnit = testing.suites.register("archUnit", JvmTestSuite::class) {
 
 val graalVmTest = testing.suites.register("graalVmTest", JvmTestSuite::class) {
 	dependencies {
-		implementation(project())
-		implementation(projects.junitJupiter)
-		implementation(testFixtures(projects.junitJupiterApi))
-		implementation(libs.assertj)
-		implementation(libs.jackson.databind) {
+		//implementation(project())
+		//implementation(projects.junitJupiter)
+		//implementation(testFixtures(projects.junitJupiterApi))
+		//implementation(libs.assertj)
+		//implementation(libs.jackson.databind) {
+		implementation(server.markhome.mcf.v3_1.project())
+		implementation(server.markhome.mcf.v3_1.projects.junitJupiter)
+		implementation(testFixtures(server.markhome.mcf.v3_1.projects.junitJupiterApi))
+		implementation(server.markhome.mcf.v3_1.libs.assertj)
+		implementation(server.markhome.mcf.v3_1.libs.jackson.databind) {
 			because("parsing GraalVM reachability metadata")
 		}
-		runtimeOnly(projects.junitPlatformLauncher)
-		runtimeOnly(projects.junitPlatformReporting)
-		runtimeOnly(libs.openTestReporting.events)
-		runtimeOnly.bundle(libs.bundles.log4j)
+		runtimeOnly(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+		runtimeOnly(server.markhome.mcf.v3_1.projects.junitPlatformReporting)
+		runtimeOnly(server.markhome.mcf.v3_1.libs.openTestReporting.events)
+		runtimeOnly.bundle(server.markhome.mcf.v3_1.libs.bundles.log4j)
+		//runtimeOnly(projects.junitPlatformLauncher)
+		//runtimeOnly(projects.junitPlatformReporting)
+		//runtimeOnly(libs.openTestReporting.events)
+		//runtimeOnly.bundle(libs.bundles.log4j)
 	}
 
 	targets {
@@ -203,7 +251,8 @@ val graalVmTest = testing.suites.register("graalVmTest", JvmTestSuite::class) {
 				configureToolingSupportTests()
 				val graalVmHomePattern = "GRAALVM_\\d+_HOME".toRegex()
 				val graalVmHomePresent = providers.environmentVariablesPrefixedBy("GRAALVM_")
-					.map { it.keys.any { name -> name.matches(graalVmHomePattern) } }
+					.map { server.markhome.mcf.v3_1.it.keys.any { name -> name.matches(graalVmHomePattern) } }
+					//.map { it.keys.any { name -> name.matches(graalVmHomePattern) } }
 				onlyIf("a GRAALVM_<version>_HOME environment variable is set") { graalVmHomePresent.get() }
 			}
 		}
@@ -228,39 +277,51 @@ tasks.check {
 
 testing.suites.named<JvmTestSuite>("test") {
 	dependencies {
-		implementation(libs.bndlib) {
+		implementation(server.markhome.mcf.v3_1.libs.bndlib) {
+		//implementation(libs.bndlib) {
 			because("parsing OSGi metadata")
 		}
-		runtimeOnly(libs.slf4j.julBinding) {
+		runtimeOnly(server.markhome.mcf.v3_1.libs.slf4j.julBinding) {
+		//runtimeOnly(libs.slf4j.julBinding) {
 			because("provide appropriate SLF4J binding")
 		}
-		implementation(libs.ant) {
+		implementation(server.markhome.mcf.v3_1.libs.ant) {
+		//implementation(libs.ant) {
 			because("we reference Ant's main class")
 		}
-		implementation.bundle(libs.bundles.xmlunit)
-		implementation(testFixtures(projects.junitJupiterApi))
-		implementation(testFixtures(projects.junitPlatformReporting))
-		implementation(libs.snapshotTests.junit5)
-		implementation(libs.snapshotTests.xml)
+		implementation.bundle(server.markhome.mcf.v3_1.libs.bundles.xmlunit)
+		implementation(testFixtures(server.markhome.mcf.v3_1.projects.junitJupiterApi))
+		implementation(testFixtures(server.markhome.mcf.v3_1.projects.junitPlatformReporting))
+		implementation(server.markhome.mcf.v3_1.libs.snapshotTests.junit5)
+		implementation(server.markhome.mcf.v3_1.libs.snapshotTests.xml)
+		//implementation.bundle(libs.bundles.xmlunit)
+		//implementation(testFixtures(projects.junitJupiterApi))
+		//implementation(testFixtures(projects.junitPlatformReporting))
+		//implementation(libs.snapshotTests.junit5)
+		//implementation(libs.snapshotTests.xml)
 	}
 
 	targets {
 		all {
 			testTask.configure {
-				shouldRunAfter(archUnit)
+				shouldRunAfter(server.markhome.mcf.v3_1.archUnit)
+				//shouldRunAfter(archUnit)
 				configureToolingSupportTests()
 
 				jvmArgumentProviders += JarPath(project, thirdPartyJarsClasspath.get(), "thirdPartyJars")
 				jvmArgumentProviders += JarPath(project, antJarsClasspath.get(), "antJars")
 				jvmArgumentProviders += MavenDistribution(project, unzipMavenDistribution, mavenDistributionDir)
 
-				systemProperty("junit.modules", modularProjects.map { it.javaModuleName }.joinToString(","))
+				systemProperty("junit.modules", modularProjects.map { server.markhome.mcf.v3_1.it.javaModuleName }.joinToString(","))
+				//systemProperty("junit.modules", modularProjects.map { it.javaModuleName }.joinToString(","))
 
 				modularProjects.forEach { project ->
 					jvmArgumentProviders += ModuleSourcePath(
-						project.javaModuleName,
+						server.markhome.mcf.v3_1.project.javaModuleName,
+						//project.javaModuleName,
 						moduleSourceDirsPath.get().incoming.artifactView {
-							componentFilter { it is ProjectComponentIdentifier && it.projectPath == project.path }
+							componentFilter { server.markhome.mcf.v3_1.it is ProjectComponentIdentifier && server.markhome.mcf.v3_1.it.projectPath == project.path }
+							//componentFilter { it is ProjectComponentIdentifier && it.projectPath == project.path }
 						}.files
 					)
 				}
@@ -270,7 +331,8 @@ testing.suites.named<JvmTestSuite>("test") {
 					dir("${rootDir}/documentation/src/test").withPathSensitivity(RELATIVE)
 				}
 
-				jvmArgumentProviders += JavaHomeDir(project, 17, develocity.testDistribution.enabled)
+				jvmArgumentProviders += JavaHomeDir(server.markhome.mcf.v3_1.project, 17, server.markhome.mcf.v3_1.develocity.testDistribution.enabled)
+				//jvmArgumentProviders += JavaHomeDir(project, 17, develocity.testDistribution.enabled)
 			}
 		}
 	}
@@ -285,12 +347,14 @@ fun Test.configureToolingSupportTests() {
 	// is not executed.
 	if (enabled) {
 		dependsOn(normalizeMavenRepo)
-		jvmArgumentProviders += MavenRepo(project, normalizeMavenRepo.map { it.destinationDir })
+		jvmArgumentProviders += MavenRepo(server.markhome.mcf.v3_1.project, normalizeMavenRepo.map { it.destinationDir })
+		//jvmArgumentProviders += MavenRepo(project, normalizeMavenRepo.map { it.destinationDir })
 	}
 	environment.remove("JAVA_TOOL_OPTIONS")
 
 	inputs.apply {
-		dir("projects").withPathSensitivity(RELATIVE)
+		dir("server.markhome.mcf.v3_1.projects").withPathSensitivity(RELATIVE)
+		//dir("projects").withPathSensitivity(RELATIVE)
 		file("${rootDir}/gradle.properties").withPathSensitivity(RELATIVE)
 		file("${rootDir}/settings.gradle.kts").withPathSensitivity(RELATIVE)
 		file("${rootDir}/gradlew").withPathSensitivity(RELATIVE)
@@ -301,13 +365,17 @@ fun Test.configureToolingSupportTests() {
 	// Disable capturing output since parallel execution is enabled and output of
 	// external processes happens on non-test threads which can't reliably be
 	// attributed to the test that started the process.
-	systemProperty("junit.platform.output.capture.stdout", "false")
-	systemProperty("junit.platform.output.capture.stderr", "false")
+	systemProperty("server.markhome.mcf.v3_1.junit.platform.output.capture.stdout", "false")
+	systemProperty("server.markhome.mcf.v3_1.junit.platform.output.capture.stderr", "false")
+	//systemProperty("junit.platform.output.capture.stdout", "false")
+	//systemProperty("junit.platform.output.capture.stderr", "false")
 
-	systemProperty("junit.moduleDirectories", modularProjects.map { it.name }.joinToString(","))
+	systemProperty("server.markhome.mcf.v3_1.junit.moduleDirectories", modularProjects.map { it.name }.joinToString(","))
+	//systemProperty("junit.moduleDirectories", modularProjects.map { it.name }.joinToString(","))
 
 	val gradleJavaVersion = JavaVersion.current().majorVersion.toInt()
 	jvmArgumentProviders += JavaHomeDir(project, gradleJavaVersion, develocity.testDistribution.enabled)
+	//jvmArgumentProviders += JavaHomeDir(project, gradleJavaVersion, develocity.testDistribution.enabled)
 	systemProperty("gradle.java.version", gradleJavaVersion)
 }
 
@@ -369,7 +437,8 @@ class MavenDistribution(project: Project, sourceTask: TaskProvider<*>, distribut
 	@InputDirectory
 	@PathSensitive(RELATIVE)
 	val mavenDistribution: DirectoryProperty = project.objects.directoryProperty()
-		.fileProvider(project.files(distributionDir).builtBy(sourceTask).elements.map { it.single().asFile.listFilesOrdered().single() })
+		.fileProvider(project.files(distributionDir).builtBy(sourceTask).elements.map { server.markhome.mcf.v3_1.it.single().asFile.listFilesOrdered().single() })
+		//.fileProvider(project.files(distributionDir).builtBy(sourceTask).elements.map { it.single().asFile.listFilesOrdered().single() })
 
 	override fun asArguments() = listOf("-DmavenDistribution=${mavenDistribution.get().asFile.absolutePath}")
 }
@@ -379,5 +448,6 @@ class ModuleSourcePath(
 	@get:Internal val dirs: FileCollection // already tracked indirectly
 ) : CommandLineArgumentProvider {
 	override fun asArguments() =
-		listOf("-Djunit.moduleSourcePath.${moduleName}=${dirs.filter { it.exists() }.asPath}")
+		listOf("-Djunit.moduleSourcePath.${moduleName}=${dirs.filter { server.markhome.mcf.v3_1.it.exists() }.asPath}")
+		//listOf("-Djunit.moduleSourcePath.${moduleName}=${dirs.filter { it.exists() }.asPath}")
 }

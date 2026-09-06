@@ -1,7 +1,10 @@
 plugins {
-	id("junitbuild.java-library-conventions")
-	id("junitbuild.junit4-compatibility")
-	id("junitbuild.testing-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.java-library-conventions")
+	id("server.markhome.mcf.v3_1.junitbuild.junit4-compatibility")
+	id("server.markhome.mcf.v3_1.junitbuild.testing-conventions")
+	//id("junitbuild.java-library-conventions")
+	//id("junitbuild.junit4-compatibility")
+	//id("junitbuild.testing-conventions")
 	`java-test-fixtures`
 	groovy
 }
@@ -9,26 +12,42 @@ plugins {
 description = "JUnit Vintage Engine"
 
 dependencies {
-	api(platform(projects.junitBom))
-	api(projects.junitPlatformEngine)
-	api(libs.junit4)
+	api(platform(server.markhome.mcf.v3_1.projects.junitBom))
+	api(server.markhome.mcf.v3_1.projects.junitPlatformEngine)
+	api(server.markhome.mcf.v3_1.libs.junit4)
+	//api(platform(projects.junitBom))
+	//api(projects.junitPlatformEngine)
+	//api(libs.junit4)
 
-	compileOnlyApi(libs.apiguardian)
-	compileOnlyApi(libs.jspecify)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.apiguardian)
+	compileOnlyApi(server.markhome.mcf.v3_1.libs.jspecify)
+	//compileOnlyApi(libs.apiguardian)
+	//compileOnlyApi(libs.jspecify)
 
-	testFixturesApi(platform(libs.groovy2.bom))
-	testFixturesApi(libs.spock1)
-	testFixturesImplementation(projects.junitPlatformSuiteApi)
+	testFixturesApi(platform(server.markhome.mcf.v3_1.libs.groovy2.bom))
+	testFixturesApi(server.markhome.mcf.v3_1.libs.spock1)
+	testFixturesImplementation(server.markhome.mcf.v3_1.projects.junitPlatformSuiteApi)
+	//testFixturesApi(platform(server.markhome.mcf.v3_1.libs.groovy2.bom))
+	//testFixturesApi(server.markhome.mcf.v3_1.libs.spock1)
+	//testFixturesImplementation(server.markhome.mcf.v3_1.projects.junitPlatformSuiteApi)
 
-	testImplementation(projects.junitPlatformLauncher)
-	testImplementation(projects.junitPlatformSuiteEngine)
-	testImplementation(projects.junitPlatformTestkit)
-	testImplementation(testFixtures(projects.junitPlatformCommons))
-	testImplementation(testFixtures(projects.junitJupiterApi))
-	testImplementation(testFixtures(projects.junitPlatformLauncher))
-	testImplementation(testFixtures(projects.junitPlatformReporting))
+	testImplementation(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+	testImplementation(server.markhome.mcf.v3_1.projects.junitPlatformSuiteEngine)
+	testImplementation(server.markhome.mcf.v3_1.projects.junitPlatformTestkit)
+	testImplementation(testFixtures(server.markhome.mcf.v3_1.projects.junitPlatformCommons))
+	testImplementation(testFixtures(server.markhome.mcf.v3_1.projects.junitJupiterApi))
+	testImplementation(testFixtures(server.markhome.mcf.v3_1.projects.junitPlatformLauncher))
+	testImplementation(testFixtures(server.markhome.mcf.v3_1.projects.junitPlatformReporting))
+	//testImplementation(projects.junitPlatformLauncher)
+	//testImplementation(projects.junitPlatformSuiteEngine)
+	//testImplementation(projects.junitPlatformTestkit)
+	//testImplementation(testFixtures(projects.junitPlatformCommons))
+	//testImplementation(testFixtures(projects.junitJupiterApi))
+	//testImplementation(testFixtures(projects.junitPlatformLauncher))
+	//testImplementation(testFixtures(projects.junitPlatformReporting))
 
-	osgiVerification(projects.junitPlatformLauncher)
+	osgiVerification(server.markhome.mcf.v3_1.projects.junitPlatformLauncher)
+	//osgiVerification(projects.junitPlatformLauncher)
 }
 
 tasks {
